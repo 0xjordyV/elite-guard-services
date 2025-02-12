@@ -166,26 +166,36 @@ class Employee(models.Model):
         decimal_places=2,
         verbose_name='Estatura',
         help_text='Estatura en metros',
+        blank=True,
+        null=True
     )
     weight = models.DecimalField(
         max_digits=5,
         decimal_places=2,
         verbose_name='Peso',
         help_text='Peso en kilogramos',
+        blank=True,
+        null=True
     )
     marital_status = models.ForeignKey(
         MaritalStatus,
         on_delete=models.PROTECT,
-        verbose_name='Estado civil'
+        verbose_name='Estado civil',
+        blank=True,
+        null=True
     )
     education = models.ForeignKey(
         Education,
         on_delete=models.PROTECT,
-        verbose_name='Nivel de educación'
+        verbose_name='Nivel de educación',
+        blank=True,
+        null=True
     )
     languages = models.ManyToManyField(
         Language,
-        verbose_name='Idiomas'
+        verbose_name='Idiomas',
+        blank=True,
+        null=True
     )
     photo = models.ImageField(
         upload_to='employees/photos/',
@@ -248,6 +258,7 @@ class Employee(models.Model):
         verbose_name='INE',
         help_text='Número de credencial de Instituto Nacional Electoral',
         unique=True
+
     )
     uniform_date = models.DateField(
         verbose_name='Fecha de uniforme',
@@ -269,47 +280,65 @@ class Employee(models.Model):
     )
     knowledge = models.TextField(
         verbose_name='Conocimientos',
-        help_text='Conocimientos y experiencia del empleado'
+        help_text='Conocimientos y experiencia del empleado',
+        blank=True,
+        null=True
     )
     skills = models.TextField(
         verbose_name='Habilidades',
-        help_text='Habilidades y destrezas del empleado'
+        help_text='Habilidades y destrezas del empleado',
+        blank=True,
+        null=True
     )
     
     # Contact info
     municipality = models.ForeignKey(
         Municipality,
         on_delete=models.PROTECT,
-        verbose_name='Lugar de residencia',
-        help_text='Estado y municipio de residencia'
+        verbose_name='Municipio',
+        help_text='Municipio de residencia',
+        blank=True,
+        null=True
     )
     neighborhood = models.ForeignKey(
         Neighborhood,
         on_delete=models.PROTECT,
         verbose_name='Colonia',
+        blank=True,
+        null=True
     )
     postal_code = models.CharField(
         max_length=5,
-        verbose_name='Código postal'
+        verbose_name='Código postal',
+        blank=True,
+        null=True
     )
     address_street = models.CharField(
         max_length=100,
-        verbose_name='Calle de residencia'
+        verbose_name='Calle de residencia',
+        blank=True,
+        null=True
     )
     address_number = models.CharField(
         max_length=10,
         verbose_name='Número de residencia',
-        help_text='Número de la casa o departamento'
+        help_text='Número de la casa o departamento',
+        blank=True,
+        null=True
     )
     phone = models.CharField(
         max_length=10,
         verbose_name='Teléfono',
-        unique=True
+        unique=True,
+        blank=True,
+        null=True
     )
-    emergency_phone = models.CharField(
-        max_length=10,
-        verbose_name='Teléfono de emergencia'
-    )
+    # emergency_phone = models.CharField(
+    #     max_length=10,
+    #     verbose_name='Teléfono de emergencia',
+    #     blank=True,
+    #     null=True
+    # )
     
     # Bank info
     bank = models.ForeignKey(

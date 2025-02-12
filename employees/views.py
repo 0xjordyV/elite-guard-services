@@ -50,8 +50,8 @@ class ReportEmployeeDetailsView(
         neighborhood = employee.neighborhood.name
         context['employee']["neighborhood"] = neighborhood
 
-        estado, municipio = employee.municipality.name.split(" / ")
-        context['employee']["estado"] = estado
+        municipio = employee.municipality.name
+        context['employee']["estado"] = "MTY"
         context['employee']["municipio"] = municipio
         
         context['employee']["status_history"] = employee.status_history
@@ -127,16 +127,17 @@ class ApiValidateCurpView(
     permission_required = 'employees.view_employee'
 
     def valid_curp(self, curp):
+        return True
         # Regular expression to validate the general CURP format
-        curp_regex = r"^([A-Z]{4}\d{6}[HM]" \
-                     r"(?:AS|BC|BS|CC|CL|CM|CS|CH|DF|GR|GT|HG|JC|MC|MS|MN|" \
-                     r"NT|OC|PL|QR|SL|SP|TC|TL|VZ|YN|ZS)" \
-                     r"[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)$"
-        matched = re.match(curp_regex, curp)
+        # curp_regex = r"^([A-Z]{4}\d{6}[HM]" \
+        #      r"(?:AS|BC|BS|CC|CL|CM|CS|CH|DF|GR|GT|HG|JC|MC|MS|MN|NL|" \
+        #      r"NT|OC|PL|QR|SL|SP|TC|TL|VZ|YN|ZS)" \
+        #      r"[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])([\dA])$"
+        # matched = re.match(curp_regex, curp)
 
-        # Check if it matches the general format
-        if not matched:
-            return False
+        # # Check if it matches the general format
+        # if not matched:
+        #     return False
 
         # Function to calculate the verification digit
         def verification_digit(curp17):
