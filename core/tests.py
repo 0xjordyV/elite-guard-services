@@ -1,6 +1,8 @@
 from django.test import TestCase
 from django.utils import timezone
 from utils import dates
+import os
+from django.conf import settings
 
 
 class RedirectsTest(TestCase):
